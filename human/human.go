@@ -4,6 +4,6 @@ type Person struct {
 	Age int
 }
 
-func (p *Person) isChild() bool {
+func (p *Person) IsChild() bool {
 	return p.Age < 10
 }
