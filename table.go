@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 
@@ -9,6 +10,9 @@ import (
 
 func main() {
 	fmt.Println("This is New Table")
+	stdout := bufio.NewWriter(os.Stdout)
+
+	//tableString := &strings.Builder{}
 	data := [][]string{
 		[]string{"1/1/2014", "Domain name", "2233", "$10.98"},
 		[]string{"1/1/2014", "January Hosting", "2233", "$54.95"},
@@ -16,11 +20,34 @@ func main() {
 		[]string{"1/4/2014", "February Extra Bandwidth", "2233", "$30.00"},
 	}
 
-	table := tablewriter.NewWriter(os.Stdout)
+	table := tablewriter.NewWriter(stdout)
 	table.SetHeader([]string{"Date", "Description", "CV2", "Amount"})
 	table.SetFooter([]string{"", "", "Total", "$146.93"}) // Add Footer
 	table.SetBorder(false)                                // Set Border to false
 	table.AppendBulk(data)
 
 	table.Render()
+	fmt.Println(stdout.Size())
+	//fmt.Println(tableString.String())
+	//fmt.Println(len(tableString.String()))
+
+	/*
+		random := []string{
+			"Object/root",
+			"├─Object/child1",
+			"│ │           ├─C1.1", // first condition child gets pipes, children pipe and ├─
+			"│ │           └─C1.2", // last condition child gets pipes, children pipe and └─
+			"│ └─Object/child1.1",
+			"└─Object/child2",
+			"  │           ├─C2.1", // first condition child gets spaces, children pipe and ├─
+			"  │           └─C2.2", // last condition child gets spaces, children pipe and └─
+			"  └─Object/child2.1",
+		}
+
+		for i := range random {
+			for j := range random[i] {
+				fmt.Println(string(random[i][j]))
+			}
+			//fmt.Println("\n")
+		}*/
 }
