@@ -20,7 +20,7 @@ var _ = Describe("Person is a Child", func() {
 			log.Println("This is child")
 		})
 		It("returns true", func() {
-			person := human.Person{Age: 9}
+			person := human.Person{Age: 9, FirstName: "Pinku", LastName: "Das"}
 
 			response := person.IsChild()
 

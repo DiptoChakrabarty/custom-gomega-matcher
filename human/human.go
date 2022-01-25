@@ -1,7 +1,9 @@
 package human
 
 type Person struct {
-	Age int
+	Age       int
+	FirstName string
+	LastName  string
 }
 
 func (p *Person) IsChild() bool {
