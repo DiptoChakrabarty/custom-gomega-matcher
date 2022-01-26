@@ -10,27 +10,30 @@ import (
 	"github.com/onsi/gomega/types"
 )
 
+/*
 type HumanBeing interface {
 	Name() string
-}
+}*/
 
 func TestHumanStruct(t *testing.T) {
 	tests := []struct {
-		name      string
-		humanTest Person
-		want      bool
+		name       string
+		targetName string
+		humanTest  Person
+		want       bool
 	}{
 		{
-			name:      "Pinku",
-			humanTest: Person{name: "Pinku"},
-			want:      true,
+			name:       "Compare first names",
+			targetName: "Pinku",
+			humanTest:  Person{name: "Pinku"},
+			want:       true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
 			p1 := Person{name: "Pinku"}
-			g.Expect(p1.Name()).To(Equal(MatchFirstName(tt.name)))
+			g.Expect(p1).To(Equal(MatchFirstName(tt.targetName)))
 		})
 	}
 }
@@ -51,7 +54,8 @@ func MatchFirstName(s string) types.GomegaMatcher {
 func (p *Person) Match(actual interface{}) (bool, error) {
 	fmt.Println("This is actuval", actual)
 	fmt.Println("This is person", p)
-	if p.name != actual.(string) {
+	pr := actual.(Person)
+	if p.name != pr.name {
 		return false, fmt.Errorf("Wrong Person")
 	}
 	return true, nil
