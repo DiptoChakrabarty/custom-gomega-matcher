@@ -47,13 +47,13 @@ func (p *Person) Name() string {
 }
 
 func MatchFirstName(s string) types.GomegaMatcher {
-	fmt.Println(s)
+	//fmt.Println(s)
 	return &Person{name: s}
 }
 
 func (p *Person) Match(actual interface{}) (bool, error) {
-	fmt.Println("This is actuval", actual)
-	fmt.Println("This is person", p)
+	//fmt.Println("This is actuval", actual)
+	//fmt.Println("This is person", p)
 	pr := actual.(Person)
 	if p.name != pr.name {
 		return false, fmt.Errorf("Wrong Person")
