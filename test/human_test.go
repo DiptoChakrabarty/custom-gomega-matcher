@@ -18,40 +18,40 @@ type HumanBeing interface {
 func TestHumanStruct(t *testing.T) {
 	tests := []struct {
 		name        string
-		targetAge   int
+		targetAge   []int
 		humanTarget Person
 		want        bool
 	}{
 		{
 			name:        "Compare Age Correct",
-			targetAge:   10,
-			humanTarget: Person{age: 10},
+			targetAge:   []int{10, 20},
+			humanTarget: Person{age: []int{10, 20}},
 			want:        true,
 		},
 		{
 			name:        "Compare Age Incorrect",
-			targetAge:   11,
-			humanTarget: Person{age: 12},
+			targetAge:   []int{11, 21},
+			humanTarget: Person{age: []int{10, 20}},
 			want:        false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
-			g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
+			g.Expect(tt.humanTarget).ShouldNot(MatchAge(tt.targetAge))
 		})
 	}
 }
 
 type Person struct {
-	age int
+	age []int
 }
 
-func (p *Person) Age() int {
+func (p *Person) Age() []int {
 	return p.age
 }
 
-func MatchAge(a int) types.GomegaMatcher {
+func MatchAge(a []int) types.GomegaMatcher {
 	//fmt.Println(s)
 	return &Person{age: a}
 }
@@ -59,9 +59,13 @@ func MatchAge(a int) types.GomegaMatcher {
 func (p *Person) Match(actual interface{}) (bool, error) {
 	//fmt.Println("This is actuval", actual)
 	//fmt.Println("This is person", p)
-	pr := actual.(Person)
-	if p.age != pr.age {
-		return false, fmt.Errorf("Wrong Person")
+	switch actual := actual.(type) {
+	case []int:
+		for i, j := range actual {
+			if j != p.age[i] {
+				return false, fmt.Errorf("Wrong Person")
+			}
+		}
 	}
 	return true, nil
 }
