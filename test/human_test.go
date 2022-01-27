@@ -17,21 +17,28 @@ type HumanBeing interface {
 
 func TestHumanStruct(t *testing.T) {
 	tests := []struct {
-		name      string
-		targetAge int
-		want      bool
+		name        string
+		targetAge   int
+		humanTarget Person
+		want        bool
 	}{
 		{
-			name:      "Compare first names",
-			targetAge: 10,
-			want:      true,
+			name:        "Compare Age Correct",
+			targetAge:   10,
+			humanTarget: Person{age: 10},
+			want:        true,
+		},
+		{
+			name:        "Compare Age Incorrect",
+			targetAge:   11,
+			humanTarget: Person{age: 12},
+			want:        false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
-			p1 := Person{age: 10}
-			g.Expect(p1.Age()).Should(MatchAge(tt.targetAge))
+			g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
 		})
 	}
 }
@@ -52,8 +59,8 @@ func MatchAge(a int) types.GomegaMatcher {
 func (p *Person) Match(actual interface{}) (bool, error) {
 	//fmt.Println("This is actuval", actual)
 	//fmt.Println("This is person", p)
-	pr := actual.(int)
-	if p.age != pr {
+	pr := actual.(Person)
+	if p.age != pr.age {
 		return false, fmt.Errorf("Wrong Person")
 	}
 	return true, nil
