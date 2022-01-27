@@ -38,7 +38,7 @@ func TestHumanStruct(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
-			g.Expect(tt.humanTarget).ShouldNot(MatchAge(tt.targetAge))
+			g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
 		})
 	}
 }
@@ -60,8 +60,8 @@ func (p *Person) Match(actual interface{}) (bool, error) {
 	//fmt.Println("This is actuval", actual)
 	//fmt.Println("This is person", p)
 	switch actual := actual.(type) {
-	case []int:
-		for i, j := range actual {
+	case Person:
+		for i, j := range actual.age {
 			if j != p.age[i] {
 				return false, fmt.Errorf("Wrong Person")
 			}
@@ -71,9 +71,9 @@ func (p *Person) Match(actual interface{}) (bool, error) {
 }
 
 func (p *Person) FailureMessage(actual interface{}) string {
-	return fmt.Sprintf("Expected name to be %v but received %v", actual, p.age)
+	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.age)
 }
 
 func (p *Person) NegatedFailureMessage(actual interface{}) string {
-	return fmt.Sprintf("Expected name to be %v but received %v", actual, p.age)
+	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.age)
 }
