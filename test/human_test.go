@@ -19,13 +19,11 @@ func TestHumanStruct(t *testing.T) {
 	tests := []struct {
 		name      string
 		targetAge int
-		humanTest Person
 		want      bool
 	}{
 		{
 			name:      "Compare first names",
 			targetAge: 10,
-			humanTest: Person{age: 11},
 			want:      true,
 		},
 	}
@@ -33,7 +31,7 @@ func TestHumanStruct(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
 			p1 := Person{age: 10}
-			g.Expect(p1.Age()).To(Equal(MatchAge(tt.targetAge)))
+			g.Expect(p1.Age()).Should(MatchAge(tt.targetAge))
 		})
 	}
 }
@@ -51,7 +49,7 @@ func MatchAge(a int) types.GomegaMatcher {
 	return &Person{age: a}
 }
 
-func (p Person) Match(actual interface{}) (bool, error) {
+func (p *Person) Match(actual interface{}) (bool, error) {
 	//fmt.Println("This is actuval", actual)
 	//fmt.Println("This is person", p)
 	pr := actual.(int)
