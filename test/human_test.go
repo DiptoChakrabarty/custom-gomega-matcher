@@ -38,7 +38,12 @@ func TestHumanStruct(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
-			g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
+			if tt.want {
+				g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
+			} else {
+				g.Expect(tt.humanTarget).ShouldNot(MatchAge(tt.targetAge))
+			}
+
 		})
 	}
 }
