@@ -39,23 +39,41 @@ func main() {
 	//fmt.Println(len(tableString.String()))
 
 	random := []string{
-		"DATE   | DESCRIPTION |  CV2  | AMOUNT",
+		"    DATE   | DESCRIPTION |  CV2  | AMOUNT   ",
 		"-----------+-------------+-------+----------",
 		"  1/1/2014 | Domain name |  2233 | $10.98",
 		"-----------+-------------+-------+----------",
 		"						   TOTAL | $146.93",
-		"						 --------+----------",
+		"						 --------+---------- ",
 	}
 
+	flag := false
+	/*
+		for i := range random {
+			fmt.Println(i)
+			fmt.Println("new")
+			for j := range random[i] {
+				fmt.Println(i, j, string(random[i][j]))
+			}
+		}
+	*/
 	for i := range random {
 		for j := range random[i] {
-			for i := range tbl {
-				if tbl[i] != random[i][j] {
+			fmt.Println(string(random[i][j]), i, j)
+			for k := range tbl {
+				fmt.Println(string(tbl[k]), i, j)
+				if tbl[k] != random[i][j] {
 					fmt.Println("Not Matching Correctly")
+					fmt.Println(string(tbl[k]), string(random[i][j]), i, j)
+					flag = true
 					break
 				}
+			}
+			if flag {
+				break
 			}
 		}
 		//fmt.Println("\n")
 	}
+
 }
