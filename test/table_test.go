@@ -45,7 +45,8 @@ func TestTable(t *testing.T) {
 			table.SetFooter([]string{"", "", "Total", "$146.93"}) // Add Footer
 			table.SetBorder(true)                                 // Set Border to false
 			table.AppendBulk(data)
-
+			table.Render()
+			//fmt.Println(output.String())
 			g.Expect(output.String()).Should(MatchTable(tt.expected))
 		})
 	}
@@ -60,12 +61,7 @@ func MatchTable(expected []string) types.GomegaMatcher {
 }
 
 func (t *Table) Match(actual interface{}) (bool, error) {
-	fmt.Println(t.tableData)
-	fmt.Println("Data Table")
-	//table := actual.(bytes.Buffer)
 	tableString := actual.(string)
-	fmt.Println(tableString)
-	fmt.Println("Real Table")
 	tableLength := 0
 
 	for i := range t.tableData {
