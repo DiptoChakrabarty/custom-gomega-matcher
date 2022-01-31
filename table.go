@@ -21,12 +21,12 @@ func main() {
 	table := tablewriter.NewWriter(&output)
 	table.SetHeader([]string{"Date", "Description", "CV2", "Amount"})
 	table.SetFooter([]string{"", "", "Total", "$146.93"}) // Add Footer
-	table.SetBorder(false)                                // Set Border to false
+	table.SetBorder(true)                                 // Set Border to false
 	table.AppendBulk(data)
 
 	table.Render()
 	tbl := output.String()
-	fmt.Println(tbl)
+	//fmt.Println(tbl)
 	fmt.Println(len(tbl))
 	//for i, _ := range tbl {
 	//	fmt.Println(string(tbl[i]))
@@ -36,18 +36,19 @@ func main() {
 	// https://stackoverflow.com/questions/10473800/in-go-how-do-i-capture-stdout-of-a-function-into-a-string
 
 	//fmt.Println(tableString.String())
-	//fmt.Println(len(tableString.String()))
+	fmt.Println(tbl)
 
 	random := []string{
-		"    DATE   | DESCRIPTION |  CV2  | AMOUNT   ",
-		"-----------+-------------+-------+----------",
-		"  1/1/2014 | Domain name |  2233 | $10.98   ",
-		"-----------+-------------+-------+----------",
-		"						   TOTAL | $146.93   ",
-		"						 --------+---------- ",
+		"+----------+-------------+-------+---------+",
+		"|   DATE   | DESCRIPTION |  CV2  | AMOUNT  |",
+		"+----------+-------------+-------+---------+",
+		"| 1/1/2014 | Domain name |  2233 | $10.98  |",
+		"+----------+-------------+-------+---------+",
+		"|                          TOTAL | $146.93 |",
+		"+----------+-------------+-------+---------+",
 	}
 
-	flag := false
+	//flag := false
 	tablelength := 0
 	/*
 		for i := range random {
@@ -58,20 +59,18 @@ func main() {
 			}
 		}
 	*/
+	fmt.Println(len(random), len(random[0]))
 	for i := range random {
 		for j := range random[i] {
 			if string(random[i][j]) != string(tbl[tablelength]) {
-				flag = true
+				//flag = true
 				fmt.Println("Invalid Characters")
 				fmt.Println(i, j, string(random[i][j]), string(tbl[tablelength]))
-				break
-			}
-			if flag {
-				break
 			}
 			tablelength += 1
 		}
 		//fmt.Println("\n")
 	}
+	fmt.Println(tablelength)
 
 }
