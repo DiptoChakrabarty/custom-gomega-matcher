@@ -10,6 +10,11 @@ import (
 
 func main() {
 	fmt.Println("This is New Table")
+	/*f, err := os.Create("test.txt")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}*/
 	//stdout := bufio.NewWriter(os.Stdout)
 	var output bytes.Buffer
 
@@ -26,6 +31,12 @@ func main() {
 
 	table.Render()
 	tbl := output.String()
+	/*fmt.Fprintln(f, tbl)
+	err = f.Close()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}*/
 	//fmt.Println(tbl)
 	fmt.Println(len(tbl))
 	//for i, _ := range tbl {
