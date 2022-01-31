@@ -2,12 +2,14 @@ package test
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 
 	//	. "github.com/onsi/ginkgo/v2"
 
 	"github.com/olekukonko/tablewriter"
 	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/types"
 )
 
 func TestTable(t *testing.T) {
@@ -44,7 +46,43 @@ func TestTable(t *testing.T) {
 			table.SetBorder(true)                                 // Set Border to false
 			table.AppendBulk(data)
 
-			g.Expect(table).Should(MatchTable(tt.expected))
+			g.Expect(output.String()).Should(MatchTable(tt.expected))
 		})
 	}
+}
+
+type Table struct {
+	tableData []string
+}
+
+func MatchTable(expected []string) types.GomegaMatcher {
+	return &Table{tableData: expected}
+}
+
+func (t *Table) Match(actual interface{}) (bool, error) {
+	fmt.Println(t.tableData)
+	fmt.Println("Data Table")
+	//table := actual.(bytes.Buffer)
+	tableString := actual.(string)
+	fmt.Println(tableString)
+	fmt.Println("Real Table")
+	tableLength := 0
+
+	for i := range t.tableData {
+		for j := range t.tableData[i] {
+			if string(t.tableData[i][j]) != string(tableString[tableLength]) {
+				return false, fmt.Errorf("Wrong Table Given")
+			}
+			tableLength += 1
+		}
+	}
+	return true, nil
+}
+
+func (t *Table) FailureMessage(actual interface{}) string {
+	return "Expected and received table not equal"
+}
+
+func (t *Table) NegatedFailureMessage(actual interface{}) string {
+	return "Expected and received table not equal"
 }
