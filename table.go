@@ -4,6 +4,8 @@ import (
 	//"bufio"
 	"bytes"
 	"fmt"
+	"reflect"
+	"strings"
 
 	"github.com/olekukonko/tablewriter"
 )
@@ -51,13 +53,13 @@ func main() {
 	fmt.Println(tbl)
 
 	random := []string{
-		"+----------+-------------+-------+---------+\n",
-		"|   DATE   | DESCRIPTION |  CV2  | AMOUNT  |\n",
-		"+----------+-------------+-------+---------+\n",
-		"| 1/1/2014 | Domain name |  2233 | $10.98  |\n",
-		"+----------+-------------+-------+---------+\n",
-		"|                          TOTAL | $146.93 |\n",
-		"+----------+-------------+-------+---------+\n",
+		"+----------+-------------+-------+---------+",
+		"|   DATE   | DESCRIPTION |  CV2  | AMOUNT  |",
+		"+----------+-------------+-------+---------+",
+		"| 1/1/2014 | Domain name |  2233 | $10.98  |",
+		"+----------+-------------+-------+---------+",
+		"|                          TOTAL | $146.93 |",
+		"+----------+-------------+-------+---------+",
 	}
 
 	flag := 0
@@ -70,16 +72,18 @@ func main() {
 			fmt.Println(i, j, string(random[i][j]))
 		}
 	}*/
+	s := strings.Split(tbl, "\n")
+	/*for i, j := range s {
+		fmt.Println(i, j)
+		fmt.Println("new")
+	}*/
 
 	fmt.Println(len(random), len(random[0]))
 	for i := range random {
-		for j := range random[i] {
-			if string(random[i][j]) != string(tbl[tablelength]) {
-				flag += 1
-				fmt.Println("Invalid Characters")
-				fmt.Println(i, j, string(random[i][j]), string(tbl[tablelength]))
-			}
-			tablelength += 1
+		fmt.Println(random[i], s[i], len(random[i]), len(s[i]))
+		if !reflect.DeepEqual(random[i], s[i]) {
+			fmt.Println("THIS IS WRONG")
+			flag += 1
 		}
 		//fmt.Println("\n")
 	}
