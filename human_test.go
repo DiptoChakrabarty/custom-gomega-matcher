@@ -4,16 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	//	. "github.com/onsi/ginkgo/v2"
-
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
 )
-
-/*
-type HumanBeing interface {
-	Name() string
-}*/
 
 func TestHumanStruct(t *testing.T) {
 	tests := []struct {
@@ -48,22 +41,19 @@ func TestHumanStruct(t *testing.T) {
 	}
 }
 
+// Person Struct to Compare
 type Person struct {
 	age []int
 }
 
-func (p *Person) Age() []int {
-	return p.age
-}
-
+// MatchAge is the Custom Gomega Testing Function
 func MatchAge(a []int) types.GomegaMatcher {
-	//fmt.Println(s)
 	return &Person{age: a}
 }
 
+// Match expects the actual item which is compared to the
+// target returned from the custom Gomega function
 func (p *Person) Match(actual interface{}) (bool, error) {
-	//fmt.Println("This is actuval", actual)
-	//fmt.Println("This is person", p)
 	switch actual := actual.(type) {
 	case Person:
 		for i, j := range actual.age {

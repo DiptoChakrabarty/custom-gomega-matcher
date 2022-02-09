@@ -33,6 +33,7 @@ func main() {
 
 	table.Render()
 	tbl := output.String()
+	// This writes the table to a file which can be viewed and matched to string
 	/*fmt.Fprintln(f, tbl)
 	err = f.Close()
 	if err != nil {
@@ -46,9 +47,6 @@ func main() {
 			fmt.Println(string(tbl[i]), i)
 		}*/
 	//fmt.Println(stdout.Size())
-	// https://stackoverflow.com/questions/26804642/how-to-test-a-functions-output-stdout-stderr-in-unit-tests
-	// https://stackoverflow.com/questions/10473800/in-go-how-do-i-capture-stdout-of-a-function-into-a-string
-
 	//fmt.Println(tableString.String())
 	fmt.Println(tbl)
 
@@ -65,18 +63,7 @@ func main() {
 	flag := 0
 	tablelength := 0
 
-	/*for i := range random {
-		fmt.Println(i)
-		fmt.Println("new")
-		for j := range random[i] {
-			fmt.Println(i, j, string(random[i][j]))
-		}
-	}*/
 	s := strings.Split(tbl, "\n")
-	/*for i, j := range s {
-		fmt.Println(i, j)
-		fmt.Println("new")
-	}*/
 
 	fmt.Println(len(random), len(random[0]))
 	for i := range random {
