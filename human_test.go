@@ -18,13 +18,13 @@ func TestHumanStruct(t *testing.T) {
 		{
 			name:        "Compare Age Correct",
 			targetAge:   []int{10, 20},
-			humanTarget: Person{age: []int{10, 20}},
+			humanTarget: Person{Age: []int{10, 20}},
 			want:        true,
 		},
 		{
 			name:        "Compare Age Incorrect",
 			targetAge:   []int{11, 21},
-			humanTarget: Person{age: []int{10, 20}},
+			humanTarget: Person{Age: []int{10, 20}},
 			want:        false,
 		},
 	}
@@ -43,12 +43,12 @@ func TestHumanStruct(t *testing.T) {
 
 // Person Struct to Compare
 type Person struct {
-	age []int
+	Age []int
 }
 
 // MatchAge is the Custom Gomega Testing Function
 func MatchAge(a []int) types.GomegaMatcher {
-	return &Person{age: a}
+	return &Person{Age: a}
 }
 
 // Match expects the actual item which is compared to the
@@ -56,8 +56,8 @@ func MatchAge(a []int) types.GomegaMatcher {
 func (p *Person) Match(actual interface{}) (bool, error) {
 	switch actual := actual.(type) {
 	case Person:
-		for i, j := range actual.age {
-			if j != p.age[i] {
+		for i, j := range actual.Age {
+			if j != p.Age[i] {
 				return false, fmt.Errorf("Wrong Person")
 			}
 		}
@@ -66,9 +66,9 @@ func (p *Person) Match(actual interface{}) (bool, error) {
 }
 
 func (p *Person) FailureMessage(actual interface{}) string {
-	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.age)
+	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.Age)
 }
 
 func (p *Person) NegatedFailureMessage(actual interface{}) string {
-	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.age)
+	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.Age)
 }

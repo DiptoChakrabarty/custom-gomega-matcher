@@ -1,7 +1,6 @@
 # goTesting
-This is to Learn inDepth of Gomega and Ginkgo
 
-Aim : Learn Custom Gomega Matcher
+This Repository has code to implement custom gomega matcher
 
 As per documentation as found [here](https://onsi.github.io/gomega/#adding-your-own-matchers) we can develop custom gomega matchers which can extend the power of our testing
 
