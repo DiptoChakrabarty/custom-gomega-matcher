@@ -20,13 +20,15 @@ three methods defined for our objects.
 
 * human/human.go
     - This contains the Person struct which is to be tested
+    - This struct age attribute is tested
+    - The file also contains relevant methods to implement the gomega matcher
+
 ```sh
 type Person struct {
 	age []int
 }
+
 ```
-    - This struct age attribute is tested
-    - The file also contains relevant methods to implement the gomega matcher
 
 * human_test.go
     - The human_test.go file contains the implementation of the Person struct
