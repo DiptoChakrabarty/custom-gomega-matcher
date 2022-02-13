@@ -18,12 +18,16 @@ three methods defined for our objects.
 
 ## Files Present
 
-The human_test.go file contains a custom gomega matcher which can be used for testing
+* human/human.go
+    - This contains the Person struct which is to be tested
 ```sh
 type Person struct {
 	age []int
 }
 ```
+    - This struct age attribute is tested
+    - The file also contains relevant methods to implement the gomega matcher
 
-- This struct age attribute is tested
-- The tests follow the format followed by kubernetes sub projects which I have observed
+* human_test.go
+    - The human_test.go file contains the implementation of the Person struct
+    - The tests follow the format followed by kubernetes sub projects which I have observed

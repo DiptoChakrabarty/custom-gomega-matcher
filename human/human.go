@@ -21,10 +21,12 @@ func (p *Person) Match(actual interface{}) (bool, error) {
 	return true, nil
 }
 
+// FailureMessage method for Person struct
 func (p *Person) FailureMessage(actual interface{}) string {
 	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.Age)
 }
 
+// NegatedFailureMessage method for Person struct
 func (p *Person) NegatedFailureMessage(actual interface{}) string {
 	return fmt.Sprintf("Expected age to be %v but received %v", actual, p.Age)
 }
