@@ -33,3 +33,17 @@ type Person struct {
 * human_test.go
     - The human_test.go file contains the implementation of the Person struct
     - The tests follow the format followed by kubernetes sub projects which I have observed
+
+The tests follow a format of
+```sh
+struct {
+		name        string
+		targetAge   []int
+		humanTarget human.Person
+		want        bool
+	}
+```
+- Here name defines name of the test
+- targetAge is the values we give
+- humanTarget is the Person struct we provide
+- want identifies if true or false
