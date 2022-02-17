@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"testing"
+	"reflect"
 
 	//	. "github.com/onsi/ginkgo/v2"
 
@@ -62,16 +63,13 @@ func MatchTable(expected []string) types.GomegaMatcher {
 
 func (t *Table) Match(actual interface{}) (bool, error) {
 	tableString := actual.(string)
-	tableLength := 0
+	tableString = strings.Split(tableString, "\n")
 
 	for i := range t.tableData {
-		for j := range t.tableData[i] {
-			if string(t.tableData[i][j]) != string(tableString[tableLength]) {
-				return false, fmt.Errorf("Wrong Table Given")
-			}
-			tableLength += 1
+		if !reflect.DeepEqual(t.tableData[i], tableString[i]) {
+			fmt.Println("THIS IS WRONG")
+			return false,fmt.Errorf("InvaliD Tables given")
 		}
-	}
 	return true, nil
 }
 
