@@ -1,7 +1,6 @@
-package main
+package test
 
 import (
-	//"bufio"
 	"bytes"
 	"fmt"
 	"reflect"
