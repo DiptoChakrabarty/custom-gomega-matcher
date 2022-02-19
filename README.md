@@ -1,4 +1,4 @@
-# goTesting
+# Custom Gomega Matcher
 
 This Repository has code to implement custom gomega matcher
 
