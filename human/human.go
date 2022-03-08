@@ -13,7 +13,7 @@ func (p *Person) Match(actual interface{}) (bool, error) {
 	switch actual := actual.(type) {
 	case Person:
 		for i, j := range actual.Age {
-			if j != p.Age[i] {
+			if j != (2*p.Age[i] + 10) {
 				return false, fmt.Errorf("Wrong Person")
 			}
 		}

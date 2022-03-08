@@ -19,7 +19,7 @@ func TestHumanStruct(t *testing.T) {
 		{
 			name:        "Compare Age Correct",
 			targetAge:   []int{10, 20},
-			humanTarget: human.Person{Age: []int{10, 20}},
+			humanTarget: human.Person{Age: []int{30, 50}},
 			want:        true,
 		},
 		{
