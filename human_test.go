@@ -24,19 +24,15 @@ func TestHumanStruct(t *testing.T) {
 		},
 		{
 			name:        "Compare Age Incorrect",
-			targetAge:   []int{11, 21},
-			humanTarget: human.Person{Age: []int{10, 20}},
+			targetAge:   []int{11, 25},
+			humanTarget: human.Person{Age: []int{32, 60}},
 			want:        false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			g := NewWithT(t)
-			if tt.want {
-				g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
-			} else {
-				g.Expect(tt.humanTarget).ShouldNot(MatchAge(tt.targetAge))
-			}
+			g.Expect(tt.humanTarget).Should(MatchAge(tt.targetAge))
 
 		})
 	}
