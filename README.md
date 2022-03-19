@@ -2,6 +2,8 @@
 
 This Repository has code to implement custom gomega matcher
 
+[Check out a detailed blog here](https://diptochakrabarty.medium.com/gomega-matcher-a-guide-to-developing-your-custom-tests-in-golang-42c70f330d88)
+
 As per documentation as found [here](https://onsi.github.io/gomega/#adding-your-own-matchers) we can develop custom gomega matchers which can extend the power of our testing
 
 ```sh
